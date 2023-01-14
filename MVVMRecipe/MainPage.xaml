@@ -1,0 +1,23 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mvvmrecipe="clr-namespace:MVVMRecipe"
+             x:DataType="mvvmrecipe:MainViewModel"
+             x:Class="MVVMRecipe.MainPage"			 
+             BackgroundColor="{DynamicResource SecondaryColor}">
+
+    <StackLayout Padding="0,20,0,0">
+        <Entry Placeholder="Forename:"
+               Text="{Binding Forename, Mode=OneWayToSource}" />
+        <Entry Placeholder="Surname:"
+               Text="{Binding Surname, Mode=TwoWay}" />
+        <StackLayout Padding="0,20,0,0" Orientation="Horizontal">
+            <Label Text="Your forename is:" />
+            <Label Text="{Binding Forename, Mode=OneWay}" />
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="Your surname is:" />
+            <Label Text="{Binding Surname, Mode=OneWay}" />
+        </StackLayout>
+        <Button Text="Reset" Command="{Binding ResetCommand}" />
+    </StackLayout>
+</ContentPage>
