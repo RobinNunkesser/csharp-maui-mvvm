@@ -1,9 +1,10 @@
-﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:mvvmrecipe="clr-namespace:MVVMRecipe"
-             x:DataType="mvvmrecipe:MainViewModel"
-             x:Class="MVVMRecipe.MainPage"			 
-             BackgroundColor="{DynamicResource SecondaryColor}">
+﻿<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:MVVMRecipe"
+    x:DataType="local:MainViewModel"
+    x:Class="MVVMRecipe.MainPage"
+    BackgroundColor="{DynamicResource SecondaryColor}">
 
     <StackLayout Padding="0,20,0,0">
         <Entry Placeholder="Forename:"

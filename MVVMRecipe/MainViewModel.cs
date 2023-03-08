@@ -48,8 +48,14 @@ namespace MVVMRecipe
 
         #region INotifyPropertyChanged implementation
         public event PropertyChangedEventHandler? PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string name = "") =>
-          PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+
+        public void OnPropertyChanged(
+            [CallerMemberName] string name = ""
+        ) =>
+            PropertyChanged?.Invoke(
+                this,
+                new PropertyChangedEventArgs(name)
+            );
         #endregion
     }
 }
