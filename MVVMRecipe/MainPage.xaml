@@ -1,24 +1,69 @@
 ﻿<ContentPage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:MVVMRecipe"
-    x:DataType="local:MainViewModel"
+    xmlns:viewModels="clr-namespace:MVVMRecipe.ViewModels;assembly=MVVMRecipe.ViewModels"
+    x:DataType="viewModels:MainViewModel"
     x:Class="MVVMRecipe.MainPage"
     BackgroundColor="{DynamicResource SecondaryColor}">
 
-    <StackLayout Padding="0,20,0,0">
-        <Entry Placeholder="Forename:"
-               Text="{Binding Forename, Mode=OneWayToSource}" />
-        <Entry Placeholder="Surname:"
-               Text="{Binding Surname, Mode=TwoWay}" />
-        <StackLayout Padding="0,20,0,0" Orientation="Horizontal">
-            <Label Text="Your forename is:" />
-            <Label Text="{Binding Forename, Mode=OneWay}" />
-        </StackLayout>
-        <StackLayout Orientation="Horizontal">
-            <Label Text="Your surname is:" />
-            <Label Text="{Binding Surname, Mode=OneWay}" />
-        </StackLayout>
-        <Button Text="Reset" Command="{Binding ResetCommand}" />
-    </StackLayout>
+    <ScrollView>
+        <VerticalStackLayout Padding="24" Spacing="16">
+            <Label FontAttributes="Bold"
+                   FontSize="24"
+                   Text="MVVM Todo List" />
+
+            <Label Text="Minimales Beispiel für Datenbindung, Commands und testbare ViewModel-Logik mit CommunityToolkit.Mvvm." />
+
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                <Entry Grid.Column="0"
+                       Placeholder="Neue Aufgabe"
+                       ReturnCommand="{Binding AddTodoCommand}"
+                       Text="{Binding NewTodoTitle}" />
+
+                <Button Grid.Column="1"
+                        Command="{Binding AddTodoCommand}"
+                        Text="Add" />
+            </Grid>
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                <Frame Grid.Column="0" Padding="12">
+                    <VerticalStackLayout Spacing="4">
+                        <Label FontAttributes="Bold" Text="Offen" />
+                        <Label FontSize="20" Text="{Binding RemainingCount}" />
+                    </VerticalStackLayout>
+                </Frame>
+
+                <Frame Grid.Column="1" Padding="12">
+                    <VerticalStackLayout Spacing="4">
+                        <Label FontAttributes="Bold" Text="Erledigt" />
+                        <Label FontSize="20" Text="{Binding CompletedCount}" />
+                    </VerticalStackLayout>
+                </Frame>
+            </Grid>
+
+            <Button Command="{Binding ClearCompletedCommand}"
+                    Text="Erledigte Aufgaben entfernen" />
+
+            <CollectionView ItemsSource="{Binding Todos}">
+                <CollectionView.EmptyView>
+                    <Label HorizontalOptions="Center"
+                           Text="Keine Aufgaben vorhanden."
+                           VerticalOptions="Center" />
+                </CollectionView.EmptyView>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="viewModels:TodoItem">
+                        <Grid Padding="0,8" ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                            <CheckBox Grid.Column="0"
+                                      IsChecked="{Binding IsCompleted}" />
+
+                            <Label Grid.Column="1"
+                                   VerticalOptions="Center"
+                                   Text="{Binding Title}" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
