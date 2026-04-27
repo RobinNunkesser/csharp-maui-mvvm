@@ -1,4 +1,6 @@
-﻿namespace MVVMRecipe;
+﻿using MVVMRecipe.ViewModels;
+
+namespace MVVMRecipe;
 
 public static class MauiProgram
 {
@@ -18,6 +20,11 @@ public static class MauiProgram
                     "OpenSansSemibold"
                 );
             });
+
+        builder.Services.AddTransient<MainViewModel>();
+        builder.Services.AddTransient<MainPage>();
+        builder.Services.AddSingleton<AppShell>();
+        builder.Services.AddSingleton<App>();
 
         return builder.Build();
     }
